@@ -4,7 +4,6 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -12,18 +11,18 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
-    target: "esnext", // Optimize for modern browsers
-    minify: "terser", // Use Terser for advanced minificationnpm install terser --save-dev
-    cssCodeSplit: true, // Split CSS into separate files for better caching
+    target: "esnext",
+    minify: "terser", // Ensure terser is explicitly used
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ["react", "react-dom"], // Separate vendor libraries
+          vendor: ["react", "react-dom"],
         },
       },
     },
   },
   esbuild: {
-    jsx: "automatic", // Use React 17+ JSX runtime
+    jsx: "automatic",
   },
 });
