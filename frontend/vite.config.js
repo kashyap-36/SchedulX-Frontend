@@ -11,8 +11,9 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: "dist",
     target: "esnext", // Optimize for modern browsers
-    minify: "terser", // Use Terser for advanced minification
+    minify: "terser", // Use Terser for advanced minificationnpm install terser --save-dev
     cssCodeSplit: true, // Split CSS into separate files for better caching
     rollupOptions: {
       output: {
