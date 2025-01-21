@@ -54,6 +54,7 @@ function App() {
   const [theme, setTheme] = useState("light");
   const [isThemeLoaded, setIsThemeLoaded] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
   const facebookCalled = useRef(false);
   const linkedinCalled = useRef(false);
   const twitterCalled = useRef(false);
