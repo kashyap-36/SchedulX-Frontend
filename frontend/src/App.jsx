@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import React, { lazy, Suspense, useRef } from "react";
 // Auth Pages
 const Registration = lazy(() => import("./pages/auth/registration/Registration"));
@@ -59,6 +59,7 @@ function App() {
   const facebookCalled = useRef(false);
   const linkedinCalled = useRef(false);
   const twitterCalled = useRef(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -87,6 +88,15 @@ function App() {
       window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    if (token) {
+      localStorage.setItem("token", token);
+      setTimeout(() => navigate("/publish"));
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
