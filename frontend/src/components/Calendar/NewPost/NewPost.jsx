@@ -430,7 +430,7 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
       >
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-lg flex flex-col md:flex-row dark:bg-bgCopnents dark:text-white">
-            <div className="flex-1 p-6 transition-all duration-300">
+            <div className="flex-1 p-6 transition-all duration-300 max-h-[820px] overflow-y-auto">
               <div className="max-w-3xl mx-auto">
                 <span
                   onClick={closePopup}
