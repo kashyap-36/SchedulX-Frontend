@@ -159,6 +159,7 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [editedContent, setEditedContent] = useState(""); 
   const [mediaUrls, setMediaUrls] = useState([]); 
+  const [error, setError] = useState()
 
   const channels = [
     "Instagram",
