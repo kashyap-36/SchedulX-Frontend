@@ -48,6 +48,7 @@ import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Icons } from "../src/constants/icons";
 import Loading from "./components/loader/loader";
+import api from "./apis/api";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
