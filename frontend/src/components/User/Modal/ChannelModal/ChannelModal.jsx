@@ -29,7 +29,7 @@ const ChannelModal = ({ onClose }) => {
       setError(null);
 
       let authUrl;
-      console.log("platformName",platformName);
+      
       switch (platformName) {
         
         case "XTwitter":

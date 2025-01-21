@@ -11,7 +11,7 @@ export const SocketProvider = ({ children }) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://schedulx-backend-ybdo.onrender.com";
 
     const newSocket = io(backendUrl, { withCredentials: true });
-    console.log("Initializing Socket:", newSocket); // Log the new socket instance
+    
 
     setSocket(newSocket);
 
@@ -19,14 +19,14 @@ export const SocketProvider = ({ children }) => {
     return () => {
       if (newSocket) {
         newSocket.disconnect();
-        console.log("Socket Disconnected");
+        
       }
     };
   }, []);
 
   useEffect(() => {
     if (socket) {
-      console.log("Socket Connected:", socket);
+      
     }
   }, [socket]); // Log when socket state updates
   

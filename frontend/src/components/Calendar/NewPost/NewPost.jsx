@@ -180,7 +180,7 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
 
       const response = await api.get(`/api/v1/user/user-get/${userId}`);
       setData(response.data.data);
-      console.log("User Data:", response.data.data);
+      
     } catch (err) {
       console.error("Error fetching user data:", err);
       setError(err.response?.data?.message || "Failed to fetch user data");
@@ -202,18 +202,18 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
     );
   };
 
-  console.log("N", data);
+  
 
   useEffect(() => {
-    console.log("Received userData in NewPost:", userData);
+    
   }, [userData]);
 
-  console.log("User ID:", userData?.user?._id);
-  console.log("User Data at newpost", userData);
-  console.log("User Name:", userData?.user?.name);
+  
+  
+  
 
 
-  console.log("new post :", userData);
+  
   const handleChannelClick = (channel) => {
     if (!ConnectChannels(channel)) {
       alert(`${channel} is not connected. Please connect it first.`);
@@ -296,7 +296,7 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
       });
 
       if (response.status === 200) {
-        console.log("Server response:", response.data);
+        
         localStorage.removeItem("mediaUrls");
         return response.data;
       } else {
@@ -330,7 +330,7 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
   const handleSubmit = async (status) => {
     try {
       const uploadedMediaUrl = await uploadImages();
-      console.log("uploadedMediaUrl", uploadedMediaUrl.imagePath);
+      
       if (!uploadedMediaUrl && uploadedFiles.length > 0) {
         alert("Image upload failed.");
         return;
@@ -399,7 +399,7 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
         status,
       };
 
-      console.log("Payload being sent:", postData);
+      
 
       const response = await api.post("/api/v1/post/post-add", postData);
       closePopup();
@@ -689,7 +689,7 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
                         <Textarea
                           value={postContent}
                           onChange={(e) => {
-                            console.log("Textarea Input:", e.target.value);
+                            
                             setPostContent(e.target.value);
                           }}
                           placeholder="Start writing or use the AI Assistant"

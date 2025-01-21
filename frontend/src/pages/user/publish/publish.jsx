@@ -89,7 +89,7 @@ const Publish = () => {
   const handleOpenWithChannel = (channel) => {
     setSelectedChannels([channel]);
     setShowNewPostPopup(true);
-    console.log("channel namessss", channel);
+    
   };
 
   const handlePublish = () => {
@@ -150,7 +150,7 @@ const Publish = () => {
             }
           )
           .then((response) => {
-            console.log("User data saved successfully:", response.data);
+            
             const newUrl = `${window.location.origin}/publish`;
             window.history.replaceState(null, "", newUrl);
           })
@@ -188,7 +188,7 @@ const Publish = () => {
             }
           )
           .then((response) => {
-            console.log("User data saved successfully:", response.data);
+            
             const newUrl = `${window.location.origin}/publish`;
             window.history.replaceState(null, "", newUrl);
           })
@@ -225,7 +225,7 @@ const Publish = () => {
             }
           )
           .then((response) => {
-            console.log("User data saved successfully:", response.data);
+            
             const newUrl = `${window.location.origin}/publish`;
             window.history.replaceState(null, "", newUrl);
           })
@@ -256,7 +256,7 @@ const Publish = () => {
 
       const response = await api.get(`/api/v1/user/user-get/${userId}`);
       setUserData(response.data.data);
-      console.log("User Data : ", response.data.data);
+      
     } catch (err) {
       console.error("Error fetching user data: ", err);
       setError(err.response?.data?.message || "Failed to fetch user data");

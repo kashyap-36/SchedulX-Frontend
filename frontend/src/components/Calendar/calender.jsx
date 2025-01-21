@@ -144,7 +144,7 @@ function Calendar({ userData }) {
     }
   };
 
-  console.log(events);
+  
 
   useEffect(() => {
     fetchEvents();
@@ -177,7 +177,7 @@ function Calendar({ userData }) {
     const newDate = moment(info.event.startStr).toISOString();
     const eventId = info.event.id;
 
-    console.log("INFO", info);
+    
     const updatedEvent = events.find((event) => event.id === eventId);
     const socialMediaId =
       updatedEvent?.extendedProps?.platformSpecific?.socialMediaId;
