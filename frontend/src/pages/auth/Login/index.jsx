@@ -61,7 +61,7 @@ const LoginForm = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://schedulx-backend-gj3k.onrender.com/api/v1/auth/google"; 
+    window.location.href = "https://schedulx-backend-ybdo.onrender.com/api/v1/auth/google"; 
     // window.location.href = "http://localhost:5000/api/v1/auth/google";
   };
   const togglePasswordVisibility = () => {

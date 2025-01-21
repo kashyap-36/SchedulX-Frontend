@@ -8,7 +8,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     // const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://twitter-1-msth.onrender.com";
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://schedulx-backend-gj3k.onrender.com";
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://schedulx-backend-ybdo.onrender.com";
 
     const newSocket = io(backendUrl, { withCredentials: true });
     console.log("Initializing Socket:", newSocket); // Log the new socket instance
