@@ -19,6 +19,17 @@ const ResentPost = ({ posts, icon }) => {
             platformSpecific.content ||
             "No content available";
           const mediaUrl = platformSpecific.mediaUrls?.[0];
+
+          const scheduledTime = post.scheduledTime
+      ? new Date(post.scheduledTime).toLocaleString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      : "No Scheduled Time";
+
           return (
             <div
               key={post._id}
@@ -27,14 +38,20 @@ const ResentPost = ({ posts, icon }) => {
               {/* Left Content */}
               <div className="flex-1">
                 {/* Post Title */}
-                <div className="flex gap-2">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
                   <div className="h-5 w-5">{icon}</div>
-                  <div className="text-black font-bold mb-3 dark:text-blue-500">{platformName}</div>
+                  <div className="text-black font-bold dark:text-blue-500">{platformName}</div>
+                  </div>
+                  <div>
+
+                  </div>
                 </div>
                 {/* Post Title */}
                 <h3 className="text-base font-medium text-gray-800 mb-3 line-clamp-6 dark:text-white">
                   {postContent}
                 </h3>
+                
 
                 {/* Post Details */}
                 <div className="grid grid-cols-3 gap-4">
@@ -63,6 +80,9 @@ const ResentPost = ({ posts, icon }) => {
                     </p>
                   </div>
                 </div>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            Scheduled: <span className="font-semibold">{scheduledTime}</span>
+          </p>
               </div>
               {/* Right Image */}
               <div className="w-36 h-36">
