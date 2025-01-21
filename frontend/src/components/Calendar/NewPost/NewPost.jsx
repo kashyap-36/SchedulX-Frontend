@@ -12,6 +12,7 @@ import api from "../../../apis/api";
 import { FaInstagram } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
 import Editer from "../imageEditor/Editer";
+import SmallLoader from "../../loader/SmallLoader";
 
 const Button = ({ children, variant = "primary", size = "md", ...props }) => {
   const baseClasses = "font-semibold rounded-xl transition-colors";
@@ -160,6 +161,7 @@ function NewPost({ closePopup, initialChannels = [], userData, preview }) {
   const [editedContent, setEditedContent] = useState("");
   const [mediaUrls, setMediaUrls] = useState([]);
   const [error, setError] = useState()
+  const [isPosting, setIsPosting] = useState(false); // State to manage loader visibility
 
   const channels = [
     "Instagram",
@@ -330,6 +332,7 @@ function NewPost({ closePopup, initialChannels = [], userData, preview }) {
 
   const handleSubmit = async (status) => {
     try {
+      setIsPosting(true);
       const uploadedMediaUrl = await uploadImages();
 
       if (!uploadedMediaUrl && uploadedFiles.length > 0) {
@@ -413,6 +416,8 @@ function NewPost({ closePopup, initialChannels = [], userData, preview }) {
       } else {
         alert("An error occurred. Please try again.");
       }
+    } finally {
+      setIsPosting(false); // Hide loader
     }
   };
 
@@ -428,6 +433,11 @@ function NewPost({ closePopup, initialChannels = [], userData, preview }) {
         className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
         onClick={(e) => e.stopPropagation()}
       >
+        {isPosting && (
+          <div className="bg-black bg-opacity-50">
+            <SmallLoader />
+          </div>
+        )}
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-lg flex flex-col md:flex-row dark:bg-bgCopnents dark:text-white">
             <div className="flex-1 p-6 transition-all duration-300 max-h-[820px] overflow-y-auto">
