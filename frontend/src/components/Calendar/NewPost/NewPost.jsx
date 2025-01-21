@@ -770,12 +770,14 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
                       <Insta
                         previewImage={mediaUrls[0] || previewImages[0] || null} 
                         postContent={postContent} 
+                        data={data} 
                       />
                     )}
                     {selectedChannels.includes("LinkedIn") && (
                       <Linkdin
                         previewImage={mediaUrls[0] || previewImages[0] || null} 
                         postContent={postContent} 
+                        data={data} 
                       />
                     )}
                     {selectedChannels.includes("XTwitter") && (
@@ -789,12 +791,14 @@ function NewPost({ closePopup, initialChannels = [], userData ,preview }) {
                       <Printset
                         previewImage={mediaUrls[0] || previewImages[0] || null} 
                         postContent={postContent} 
+                        data={data} 
                       />
                     )}
                     {selectedChannels.includes("Facebook") && (
                       <Facebook
                         previewImage={mediaUrls[0] || previewImages[0] || null} 
                         postContent={postContent} 
+                        data={data} 
                       />
                     )}
                   </div>
