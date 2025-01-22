@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-const ResentPost = ({ posts, icon }) => {
+const ResentPost = ({ posts, platformIcons  }) => {
   const [filterOption, setFilterOption] = useState("none");
+
 
   const toggleFilter = () => {
     setFilterOption((prevOption) =>
@@ -46,6 +47,7 @@ const ResentPost = ({ posts, icon }) => {
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
         {filteredPosts.map((post) => {
           const platformName = post.platformName.toLowerCase();
+          const icon = platformIcons[platformName];
           const platformSpecific = post.platformSpecific?.[platformName] || {};
           const analytics = post.analytics?.[0] || {};
           const postContent =
@@ -55,6 +57,8 @@ const ResentPost = ({ posts, icon }) => {
           const mediaUrl = platformSpecific.mediaUrls?.[0];
 
           const scheduledTime = post.scheduledTime;
+
+
 
           let datePart = null;
           let formattedTime = null;
