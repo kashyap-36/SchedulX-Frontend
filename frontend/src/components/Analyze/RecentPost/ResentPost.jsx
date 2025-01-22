@@ -20,15 +20,44 @@ const ResentPost = ({ posts, icon }) => {
             "No content available";
           const mediaUrl = platformSpecific.mediaUrls?.[0];
 
-          const scheduledTime = post.scheduledTime
-      ? new Date(post.scheduledTime).toLocaleString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      : "No Scheduled Time";
+          //     const scheduledTime = post.scheduledTime
+          // ? new Date(post.scheduledTime).toLocaleString("en-US", {
+          //     year: "numeric",
+          //     month: "short",
+          //     day: "numeric",
+          //     hour: "2-digit",
+          //     minute: "2-digit",
+          //   })
+          // : "No Scheduled Time";
+          const scheduledTime = post.scheduledTime;
+
+          let datePart = null;
+          let formattedTime = null;
+
+          if (scheduledTime) {
+            try {
+              // Extract the date and time parts
+              const [date, time] = scheduledTime.split("T");
+              datePart = date; // Set date part
+              formattedTime = time ? time.slice(0, 5) : null; // Set formatted time as 'HH:mm'
+            } catch (error) {
+              console.error("Error parsing scheduled time:", error);
+            }
+          } else {
+            console.error("scheduledTime is undefined or invalid:", scheduledTime);
+          }
+
+          // Use the formatted date and time for display
+          const formattedScheduledTime = datePart && formattedTime
+            ? `${new Date(datePart).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })} at ${formattedTime}`
+            : "No Scheduled Time";
+
+          console.log(formattedScheduledTime);
+
 
           return (
             <div
@@ -40,8 +69,8 @@ const ResentPost = ({ posts, icon }) => {
                 {/* Post Title */}
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                  <div className="h-5 w-5">{icon}</div>
-                  <div className="text-black font-bold dark:text-blue-500">{platformName}</div>
+                    <div className="h-5 w-5">{icon}</div>
+                    <div className="text-black font-bold dark:text-blue-500">{platformName}</div>
                   </div>
                   <div>
 
@@ -51,7 +80,7 @@ const ResentPost = ({ posts, icon }) => {
                 <h3 className="text-base font-medium text-gray-800 mb-3 line-clamp-6 dark:text-white">
                   {postContent}
                 </h3>
-                
+
 
                 {/* Post Details */}
                 <div className="grid grid-cols-3 gap-4">
@@ -80,9 +109,9 @@ const ResentPost = ({ posts, icon }) => {
                     </p>
                   </div>
                 </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-            Scheduled: <span className="font-semibold">{scheduledTime}</span>
-          </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                  Scheduled: <span className="font-semibold">{formattedScheduledTime}</span>
+                </p>
               </div>
               {/* Right Image */}
               <div className="w-36 h-36">
