@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../../../apis/api";
 import { Icons } from "../../../constants";
 import { jwtDecode } from "jwt-decode";
+import { FaHandFist } from "react-icons/fa6";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -10,6 +11,7 @@ const LoginForm = () => {
   const [serverResponse, setServerResponse] = useState({ error: "", success: "" });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  // () => (window.location.href = `https://schedulx-backend-ybdo.onrender.com/api/v1/auth/google`)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -19,6 +21,20 @@ const LoginForm = () => {
       setTimeout(() => navigate("/publish"));
     }
   }, [navigate]);
+
+  const handleGoogleLogin = () => {
+    const apiUrl = import.meta.env.VITE_API_URL || "https://schedulx-backend-ybdo.onrender.com";
+    console.log(apiUrl);
+    if (!apiUrl || apiUrl === "undefined") {
+      console.error("API URL is not set correctly:", apiUrl);
+      alert("Login failed: API URL is missing. Please check your configuration.");
+      return;
+    }
+  
+    console.log("Redirecting to:", `${apiUrl}/api/v1/auth/google`);
+    window.location.href = `${apiUrl}/api/v1/auth/google`;
+  };
+  
 
   const validateForm = useCallback(() => {
     let errors = {};
@@ -80,7 +96,7 @@ const LoginForm = () => {
           <button
             type="button"
             className="w-full py-3 border flex items-center justify-center border-slate-200 rounded-lg hover:border-slate-400 hover:shadow transition dark:border-borderDarkmode dark:bg-bgbutton dark:text-white hover:dark:bg-white hover:dark:text-black"
-            onClick={() => (window.location.href = `${process.env.VITE_BACKEND_URL}/api/v1/auth/google`)}
+            onClick={handleGoogleLogin}
           >
             <img src="https://www.svgrepo.com/show/355037/google.svg" className="w-6 h-6" alt="Google Icon" />
             <span className="ms-2">Login with Google</span>
