@@ -13,7 +13,6 @@ import api from "../../apis/api";
 import EditPost from "./editPost/EditPost";
 import Loading from "../loader/loader";
 import { Link } from "react-router-dom";
-import SmallLoader from "../loader/SmallLoader";
 
 const CustomEvent = ({ event, onOpenModal }) => {
   const { title, extendedProps } = event;
@@ -264,9 +263,7 @@ function Calendar({ userData }) {
           </div>
         </div>
 
-        { isPosting ? (
-          <SmallLoader />
-        ) : (
+        
 
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -280,7 +277,7 @@ function Calendar({ userData }) {
             }}
             height="auto"
             // events={events}
-            events={isPosting ? placeholderEvent : events} 
+            events={events} 
             editable={true}
             droppable={true}
             eventOverlap={true}
@@ -315,7 +312,7 @@ function Calendar({ userData }) {
             }}
             classNames={`fc-dark:bg-darkBg fc-dark:text-darkText`}
           />
-        )}
+ 
       </div>
       {selectedEventId && (
         <CalenderModel

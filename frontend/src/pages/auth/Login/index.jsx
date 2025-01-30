@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../../apis/api";
 import { Icons } from "../../../constants";
@@ -6,16 +6,10 @@ import { jwtDecode } from "jwt-decode";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [formErrors, setFormErrors] = useState({});
+  const [serverResponse, setServerResponse] = useState({ error: "", success: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -26,81 +20,74 @@ const LoginForm = () => {
     }
   }, [navigate]);
 
+  const validateForm = useCallback(() => {
+    let errors = {};
+    if (!formData.email) errors.email = "Email is required.";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = "Invalid email format.";
+
+    if (!formData.password) errors.password = "Password is required.";
+    else if (formData.password.length < 6) errors.password = "Password must be at least 6 characters.";
+
+    return errors;
+  }, [formData]);
+
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
+    setServerResponse({ error: "", success: "" });
+
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
 
     try {
-      const response = await api.post(
-        "/api/v1/auth/login",
-        {
-          email: formData.email,
-          password: formData.password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await api.post("/api/v1/auth/login", formData, { withCredentials: true });
 
       if (response.data.token) {
-        setSuccess("Login successful!");
+        setServerResponse({ success: "Login successful!", error: "" });
         const { token, data } = response.data;
         localStorage.setItem("token", token);
         localStorage.setItem("userId", data._id);
-        const decodedToken = jwtDecode(token);
-        window.dispatchEvent(new CustomEvent("user-login", { detail: decodedToken.user }));
+        window.dispatchEvent(new CustomEvent("user-login", { detail: jwtDecode(token).user }));
         navigate("/publish");
-      } else {
-        setError(response.data.message || "Login failed. Please try again.");
       }
     } catch (err) {
-      
-      setError(err.response?.data?.message || "Something went wrong.");
+      const message = err.response?.data?.message || "Something went wrong.";
+      setFormErrors(message.includes("email") ? { email: message } : message.includes("password") ? { password: message } : {});
+      setServerResponse({ error: message, success: "" });
     }
   };
 
-  const handleGoogleLogin = () => {
-    window.location.href = "https://schedulx-backend-ybdo.onrender.com/api/v1/auth/google"; 
-    // window.location.href = "http://localhost:5000/api/v1/auth/google";
-  };
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
   return (
-    <div className="antialiased grid place-items-center min-h-screen px-4 sm:px-0">
-      <div className="w-full max-w-md sm:max-w-lg mx-auto bg-white p-8 sm:p-10 rounded-xl shadow shadow-slate-300 dark:text-white dark:bg-bgCopnents">
-        <h1 className="text-3xl sm:text-4xl font-bold flex items-center">Login to <span className="ms-3 flex  text-3xl sm:text-4xl items-center dark:text-white">
-          Schedul
-          <span className="text-red-600">{Icons.schedulXAuth}</span>
-        </span></h1>
+    <div className="antialiased grid place-items-center px-4 sm:px-0">
+      <div className="w-full max-w-md sm:max-w-lg mx-auto bg-white p-8 sm:p-10 rounded-xl shadow dark:text-white dark:bg-bgCopnents overflow-y-auto h-[98%]">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold flex flex-wrap items-center gap-2">
+          Login to
+          <span className="flex items-center text-2xl sm:text-3xl md:text-4xl dark:text-white whitespace-nowrap">
+            Schedul<span className="text-red-600">{Icons.schedulXAuth}</span>
+          </span>
+        </h1>
+
         <p className="text-slate-500 mt-2 dark:text-white">Hi, Welcome back 👋</p>
+
         <div className="my-5">
           <button
             type="button"
-            className="w-full py-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:shadow transition duration-150 dark:border-borderDarkmode dark:bg-bgbutton dark:text-white hover:dark:bg-white hover:dark:text-black"
-            onClick={handleGoogleLogin}
+            className="w-full py-3 border flex items-center justify-center border-slate-200 rounded-lg hover:border-slate-400 hover:shadow transition dark:border-borderDarkmode dark:bg-bgbutton dark:text-white hover:dark:bg-white hover:dark:text-black"
+            onClick={() => (window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/auth/google`)}
           >
-            <img
-              src="https://www.svgrepo.com/show/355037/google.svg"
-              className="w-6 h-6"
-              alt="Google Icon"
-              loading="lazy"
-            />
+            <img src="https://www.svgrepo.com/show/355037/google.svg" className="w-6 h-6" alt="Google Icon" />
             <span>Login with Google</span>
           </button>
         </div>
-        <div className="relative">
-          <div className="relative flex items-center py-1">
-            <div className="grow border-t border-zinc-200 dark:border-borderDarkmode"></div>
-          </div>
-        </div>
+
         <form className="mt-5" onSubmit={handleSubmit}>
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           <div className="flex flex-col space-y-5">
             <label htmlFor="email">
               <p className="font-medium text-slate-700 pb-2 dark:text-white">Email address</p>
@@ -110,13 +97,16 @@ const LoginForm = () => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow dark:text-white dark:bg-darkmode dark:border-borderDarkmode"
+                className={`w-full py-3 border ${formErrors.email ? "border-red-500" : "border-slate-200"} rounded-lg px-3 focus:outline-none hover:shadow dark:text-white dark:bg-darkmode`}
                 placeholder="Enter email address"
                 required
               />
+              {serverResponse.error && <p className="text-red-500 text-sm">{serverResponse.error}</p>}
+              {serverResponse.success && <p className="text-red-500 text-sm">{serverResponse.success}</p>}
             </label>
-            <label htmlFor="password" className="block">
-              <p className="font-medium text-slate-700 pb-2 dark:text-white">Password*</p>
+
+            <label htmlFor="password">
+              <p className="font-medium text-slate-700 pb-2 dark:text-white">Password</p>
               <div className="relative flex items-center">
                 <input
                   id="password"
@@ -124,16 +114,11 @@ const LoginForm = () => {
                   type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow dark:text-white dark:bg-darkmode  dark:border-borderDarkmode"
+                  className={`w-full py-3 border ${formErrors.password ? "border-red-500" : "border-slate-200"} rounded-lg px-3 focus:outline-none hover:shadow dark:text-white dark:bg-darkmode`}
                   placeholder="Enter your password"
                   required
                 />
-                <button
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className="absolute right-3 top-4 focus:outline-none"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-4">
                   {showPassword ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -163,43 +148,23 @@ const LoginForm = () => {
                   )}
                 </button>
               </div>
+              {formErrors.password && <p className="text-red-500 text-sm">{formErrors.password}</p>}
             </label>
-            <div className="flex flex-col sm:flex-row justify-between items-center">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="remember"
-                  className="w-4 h-4 border-slate-200 checked:bg-black"
-                />
-                <span className="ml-2 text-slate-700 dark:text-white">Remember me</span>
+
+            <div className="flex flex-wrap justify-between items-center gap-3">
+              <label className="flex items-center gap-2">
+                <input type="checkbox" className="w-4 h-4 border-slate-200" />
+                <span className="text-slate-700 dark:text-white">Remember me</span>
               </label>
-              <Link
-                to={"/forget-password"}
-                className="font-medium text-indigo-600 mt-2 sm:mt-0"
-              >
+              <Link to="/forget-password" className="text-indigo-600 font-medium text-sm sm:text-base">
                 Forgot Password?
               </Link>
             </div>
-            <button
-              type="submit"
-              className="w-full py-3 font-medium text-white bg-gray-950 hover:bg-gray-900 rounded-lg hover:shadow inline-flex space-x-2 items-center justify-center dark:bg-bgbutton hover:dark:bg-white hover:dark:text-black"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                />
-              </svg>
-              <span>Login</span>
+
+            <button type="submit" className="w-full py-3 font-medium text-white bg-gray-950 hover:bg-gray-900 rounded-lg hover:shadow dark:bg-bgbutton">
+              Login
             </button>
+
             <p className="text-center">
               Not registered yet?{" "}
               <Link

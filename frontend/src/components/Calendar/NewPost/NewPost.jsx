@@ -12,7 +12,6 @@ import api from "../../../apis/api";
 import { FaInstagram } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
 import Editer from "../imageEditor/Editer";
-import SmallLoader from "../../loader/SmallLoader";
 
 const Button = ({ children, variant = "primary", size = "md", ...props }) => {
   const baseClasses = "font-semibold rounded-xl transition-colors";
@@ -433,11 +432,6 @@ function NewPost({ closePopup, initialChannels = [], userData, preview }) {
         className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
         onClick={(e) => e.stopPropagation()}
       >
-        {isPosting && (
-          <div className="bg-black bg-opacity-50">
-            <SmallLoader />
-          </div>
-        )}
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-lg flex flex-col md:flex-row dark:bg-bgCopnents dark:text-white">
             <div className="flex-1 p-6 transition-all duration-300 max-h-[820px] overflow-y-auto">
@@ -717,7 +711,7 @@ function NewPost({ closePopup, initialChannels = [], userData, preview }) {
                           <Button
                             onClick={handleAiButtonClick}
                             disabled={isLoadingAI}
-                            className="absolute right-2 top-2 text-xs bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-indigo-500 text-white px-3 py-2 rounded-xl flex items-center gap-2 transition-all duration-300"
+                            className="absolute right-[-5px] top-[-50px] text-xs bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-indigo-500 text-white px-3 py-2 rounded-xl flex items-center gap-2 transition-all duration-300"
                           >
                             {isLoadingAI ? (
                               <>
@@ -764,10 +758,10 @@ function NewPost({ closePopup, initialChannels = [], userData, preview }) {
                         Save as Draft
                       </Button>
                       <Button
-                        className="font-bold text-slate-800 rounded-xl  p-2 border hover:bg-slate-200  dark:bg-bgbutton border-borderDarkmode dark:text-white"
+                        className="font-bold text-slate-800 rounded-xl  p-2 border hover:bg-slate-200  dark:bg-bgbutton border-borderDarkmode dark:text-white hidden sm:inline"
                         onClick={() => handleSubmit("scheduled")}
                       >
-                        <span className="hidden sm:inline">
+                        <span className="">
                           Schedule Post Now
                         </span>
                       </Button>
