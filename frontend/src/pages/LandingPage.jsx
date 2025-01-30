@@ -30,7 +30,7 @@ export default function LandingPage() {
           <Section4 />
           <Section5 />
           {/* slider */}
-          <div className="mx-auto py-20 ps-10">
+          <div className="mx-auto py-20 lg:ps-10">
             <TestimonialSlider />
           </div>
           {/* STS */}
