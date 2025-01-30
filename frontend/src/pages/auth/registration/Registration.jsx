@@ -123,11 +123,11 @@ const Registration = () => {
   };
 
   return (
-    <div className="antialiased grid place-items-center px-4 sm:px-0">
-      <div className="w-full h-[90%] max-w-md sm:max-w-lg md:max-w-2xl mx-auto bg-white p-8 rounded-xl shadow shadow-slate-300 dark:text-white dark:bg-bgCopnents  overflow-y-auto">
+    <div className="h-[90vh] flex items-center justify-center px-4 sm:px-0">
+      <div className="w-full h-[90%] lg:h-auto max-w-md sm:max-w-lg md:max-w-2xl mx-auto bg-white p-4 md:p-8 rounded-xl shadow shadow-slate-300 dark:text-white dark:bg-bgCopnents  overflow-y-auto ">
         {step === 1 && (
           <>
-            <h1 className="text-3xl sm:text-lg font-bold flex flex-wrap items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold flex flex-wrap items-center gap-3">
               Let's set up your
               <span className="flex items-center dark:text-white ">
                 Schedul
@@ -140,7 +140,7 @@ const Registration = () => {
               "Take control of your social media planning like never before." 👋
             </p>
 
-            <form className="mt-7 flex flex-col space-y-3">
+            <form className="mt-2 flex flex-col space-y-2">
               {error && (
                 <p className="text-red-500 text-center mb-4">{error}</p>
               )}
@@ -331,7 +331,7 @@ const Registration = () => {
                 </div>
               </div>
             </form>
-            <p className="text-center">
+            <p className="text-center mt-3">
               Already have an account?{" "}
               <Link
                 to={"/login"}
@@ -439,7 +439,7 @@ const Registration = () => {
                 <div
                   onClick={() => setStep(1)}
                   className="group py-3 px-3 font-medium text-white bg-gray-950 hover:bg-gray-900 rounded-lg hover:shadow inline-flex space-x-2 items-center justify-center dark:bg-bgbutton dark:text-white hover:dark:bg-white hover:dark:text-black">
-                  <span className="text-sm font-medium text-white flex items-center group-hover:text-black dark:group-hover:text-black">
+                  <span className="text-sm font-medium text-white flex items-center group-hover:cursor-pointer group-hover:text-gray-300 dark:group-hover:text-black">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-4 w-4 mr-1"

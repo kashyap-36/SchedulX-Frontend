@@ -65,8 +65,8 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="antialiased grid place-items-center px-4 sm:px-0">
-      <div className="w-full max-w-md sm:max-w-lg mx-auto bg-white p-8 sm:p-10 rounded-xl shadow dark:text-white dark:bg-bgCopnents overflow-y-auto h-[98%]">
+    <div className="h-[80vh] flex items-center justify-center px-4 sm:px-0">
+      <div className="w-full max-w-md sm:max-w-lg mx-auto bg-white p-4 md:p-8 sm:p-10 rounded-xl shadow dark:text-white dark:bg-bgCopnents overflow-y-auto ">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold flex flex-wrap items-center gap-2">
           Login to
           <span className="flex items-center text-2xl sm:text-3xl md:text-4xl dark:text-white whitespace-nowrap">
@@ -83,7 +83,7 @@ const LoginForm = () => {
             onClick={() => (window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/auth/google`)}
           >
             <img src="https://www.svgrepo.com/show/355037/google.svg" className="w-6 h-6" alt="Google Icon" />
-            <span>Login with Google</span>
+            <span className="ms-2">Login with Google</span>
           </button>
         </div>
 
