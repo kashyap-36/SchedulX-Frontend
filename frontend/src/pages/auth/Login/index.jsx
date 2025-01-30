@@ -80,7 +80,7 @@ const LoginForm = () => {
           <button
             type="button"
             className="w-full py-3 border flex items-center justify-center border-slate-200 rounded-lg hover:border-slate-400 hover:shadow transition dark:border-borderDarkmode dark:bg-bgbutton dark:text-white hover:dark:bg-white hover:dark:text-black"
-            onClick={() => (window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/auth/google`)}
+            onClick={() => (window.location.href = `${process.env.VITE_BACKEND_URL}/api/v1/auth/google`)}
           >
             <img src="https://www.svgrepo.com/show/355037/google.svg" className="w-6 h-6" alt="Google Icon" />
             <span className="ms-2">Login with Google</span>
