@@ -30,15 +30,13 @@ export default function LandingPage() {
           <Section4 />
           <Section5 />
           {/* slider */}
-          <div className="mx-auto py-20 lg:ps-10">
+          <div className="mx-auto py-10 md:py-20 lg:ps-10">
             <TestimonialSlider />
           </div>
           {/* STS */}
           <Sts />
           {/* FAQ */}
-          <div className="px-4 sm:px-10 mt-28">
-            <Faq />
-          </div>
+          <Faq />
           {/* Subscribe */}
           {/* <div className="mt-28 px-4 sm:px-10">
             <div className="max-w-7xl mx-auto bg-gradient-to-r from-teal-700 via-teal-600 to-teal-700 py-16 px-6 relative">
@@ -64,7 +62,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div> */}
-          <div className="w-full h-full pt-20">
+          <div className="w-full h-full pt-10 md:pt-20">
             <img
               src={section2}
               alt="SchedulX Calendar Feature"

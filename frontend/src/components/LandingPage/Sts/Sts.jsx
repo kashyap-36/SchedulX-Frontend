@@ -1,57 +1,53 @@
 import React from 'react';
-// Make sure to import your image like this:
-import illustration from "../../../assets/images/analytics-demo.png"; // Replace with your actual image path
+import illustration from "../../../assets/images/analytics-demo.png";
 
 function Sts() {
   return (
-    <>
-      <div className="font-[sans-serif] px-4 sm:px-10  flex flex-col lg:flex-row items-center justify-between gap-8">
-        {/* Left Image Section */}
-        <div className="flex-1">
-          <img src={illustration} alt="Marketing Team Illustration" className="w-full max-w-md mx-auto lg:max-w-full" />
-        </div>
+    <div className="sm:px-8 md:px-10 mt-10 md:mt-20 font-[sans-serif] flex flex-col lg:flex-row items-center justify-between gap-10">
+      
+      {/* Left Image Section */}
+      <div className="flex-1 flex justify-center">
+        <img 
+          src={illustration} 
+          alt="Marketing Team Illustration" 
+          className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl"
+        />
+      </div>
 
-        {/* Right Content Section */}
-        <div className="flex-1 text-center lg:text-left ps-10">
-          <h2 className="text-5xl font-bold text-gray-700 dark:text-white mb-4">
-            We are like an extension <br /> of your marketing team
-          </h2>
-          <p className="text-gray-600 text-lg mb-8">
-            SchedulX empowers your marketing efforts by providing seamless tools for content scheduling, performance tracking, and audience engagement. Our platform acts as an all-in-one solution, helping you streamline your workflow, save time, and focus on growing your brand. Let us handle the logistics while you connect with your audience more effectively.
-          </p>
+      {/* Right Content Section */}
+      <div className="flex-1 text-center lg:text-left">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-700 dark:text-white mb-6">
+          We are like an extension <br /> of your marketing team
+        </h2>
+        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+          SchedulX empowers your marketing efforts by providing seamless tools for content scheduling, 
+          performance tracking, and audience engagement. Our platform acts as an all-in-one solution, 
+          helping you streamline your workflow, save time, and focus on growing your brand. 
+          Let us handle the logistics while you connect with your audience more effectively.
+        </p>
 
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-[32px] shadow-lg border border-gray-200 dark:bg-[#37393b] text-center">
-              <h3 className="text-4xl font-bold text-gray-800 dark:text-white">
-                500<span className="text-blue-500">+</span>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-6">
+          {[
+            { value: "500", label: "Happy Clients" },
+            { value: "200", label: "Users Acquired" },
+            { value: "250", label: "Team Members" },
+            { value: "3,000", label: "Projects Completed" },
+          ].map((stat, index) => (
+            <div 
+              key={index} 
+              className="bg-white p-3 md:p-6 rounded-[32px] shadow-lg border border-gray-200 dark:bg-[#37393b] text-center"
+            >
+              <h3 className="text-2xl sm:text-4xl font-bold text-gray-800 dark:text-white">
+                {stat.value} <span className="text-blue-500">+</span>
               </h3>
-              <p className="text-gray-500 font-medium mt-2 dark:text-gray-200">Happy Clients</p>
+              <p className="text-gray-500 font-medium mt-2 dark:text-gray-200">{stat.label}</p>
             </div>
-            <div className="bg-white p-6 rounded-[32px] shadow-lg border border-gray-200 dark:bg-[#37393b] text-center">
-              <h3 className="text-4xl font-bold text-gray-800 dark:text-white">
-                200M<span className="text-blue-500">+</span>
-              </h3>
-              <p className="text-gray-500 font-medium mt-2 dark:text-gray-200">Users Acquired</p>
-            </div>
-            <div className="bg-white p-6 rounded-[32px] shadow-lg border border-gray-200 dark:bg-[#37393b] text-center">
-              <h3 className="text-4xl font-bold text-gray-800 dark:text-white">
-                250<span className="text-blue-500">+</span>
-              </h3>
-              <p className="text-gray-500 font-medium mt-2 dark:text-gray-200">Team Members</p>
-            </div>
-            <div className="bg-white p-6 rounded-[32px] shadow-lg border border-gray-200 dark:bg-[#37393b] text-center">
-              <h3 className="text-4xl font-bold text-gray-800 dark:text-white">
-                3,000<span className="text-blue-500">+</span>
-              </h3>
-              <p className="text-gray-500 font-medium mt-2 dark:text-gray-200">Projects Completed</p>
-            </div>
-
-          </div>
+          ))}
         </div>
       </div>
-    </>
+
+    </div>
   );
 }
 

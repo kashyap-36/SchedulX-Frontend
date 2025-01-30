@@ -1,28 +1,31 @@
 import React from 'react';
 import section2 from "../../../assets/images/image.webp";
-import { Icons } from '../../../constants';
 
 function Section2() {
   return (
-    <>
-      <div className="px-4 sm:px-10 mt-28">
-        <div className="w-full mx-auto grid md:grid-cols-2 justify-center items-center gap-10">
-          <div className="w-full h-full flex flex-col p-5 justify-evenly text-center">
-            <div>
-              <h2 className="md:text-4xl text-3xl font-semibold mb-6 text-blue-800">
-                Plan, Schedule, and Grow Your Audience
-              </h2>
-            </div>
-            <div className='text-lg text-slate-600 dark:text-gray-400'>
-              <p>
-                With SchedulX’s interactive calendar, you can schedule posts across multiple platforms like Facebook, Instagram, LinkedIn, and more, all from a single interface. Visualize your strategy for weeks ahead and stay consistent with your posting schedule.
-              </p>
-              <p className="mt-4">
-                Our platform also suggests optimal posting times and hashtags, helping you maximize engagement and expand your reach. Keep track of all your campaigns in one place and watch your audience grow.
-              </p>
-            </div>
-          </div>
-          <div className="w-full h-full border p-6 rounded-3xl shadow-xl bg-white  hover:shadow-2xl transition-all duration-200 dark:hover:shadow-slate-700 hover:cursor-pointer">
+    <div className="sm:px-8 md:px-10 mt-10 md:mt-20">
+      <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-center">
+        
+        {/* Left - Text Content */}
+        <div className="text-center md:text-left flex flex-col justify-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 text-blue-800">
+            Plan, Schedule, and Grow Your Audience
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600 dark:text-gray-400 leading-relaxed">
+            With SchedulX’s interactive calendar, you can schedule posts across multiple platforms 
+            like Facebook, Instagram, LinkedIn, and more, all from a single interface. Visualize 
+            your strategy for weeks ahead and stay consistent with your posting schedule.
+          </p>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-gray-400 leading-relaxed">
+            Our platform also suggests optimal posting times and hashtags, helping you maximize 
+            engagement and expand your reach. Keep track of all your campaigns in one place 
+            and watch your audience grow.
+          </p>
+        </div>
+
+        {/* Right - Image Card */}
+        <div className="flex justify-center">
+          <div className="w-full border p-6 rounded-3xl shadow-xl bg-white hover:shadow-2xl transition-all duration-200 dark:hover:shadow-slate-700 hover:cursor-pointer">
             <img
               src={section2}
               alt="SchedulX Calendar Feature"
@@ -30,8 +33,9 @@ function Section2() {
             />
           </div>
         </div>
+
       </div>
-    </>
+    </div>
   );
 }
 

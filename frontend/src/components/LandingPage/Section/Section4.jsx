@@ -4,32 +4,33 @@ import { Icons } from '../../../constants';
 
 function Section4() {
   return (
-    <>
-      <div className="px-4 sm:px-10 mt-28">
-        <div className="w-full mx-auto grid md:grid-cols-2 justify-center items-center gap-10">
-          <div className="w-full h-full flex flex-col p-5 justify-evenly text-center">
-            <div>
-              <h2 className="md:text-4xl text-3xl font-semibold mb-6 text-blue-800">
-                Track Performance, Optimize, and Grow
-              </h2>
-            </div>
-            <div className="text-lg text-slate-600 dark:text-gray-400">
-              <p>
-                With SchedulX’s analytics dashboard, you can gain real-time insights into your social media performance. Monitor key metrics like impressions, engagement, and audience growth to fine-tune your strategy for better results.
-              </p>
-              <p className="mt-4">
-                Visualize trends across all platforms and understand what resonates with your audience. From top-performing posts to detailed performance reports, SchedulX gives you everything you need to make data-driven decisions.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-y-4 gap-x-8 mt-8 mx-auto">
-              <button
-                className="bg-blue-800 hover:bg-blue-500 text-white flex items-center transition-all text-xl font-bold rounded-xl px-5 py-4 dark:bg-bgbutton hover:dark:bg-white hover:dark:text-black"
-              >
-                View Analytics
-                {Icons.arrowright}
-              </button>
-            </div>
+    <div className="sm:px-8 md:px-10 mt-10 md:mt-20">
+      <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+        
+        {/* Left - Text Content */}
+        <div className="text-center md:text-left flex flex-col justify-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 text-blue-800">
+            Track Performance, Optimize, and Grow
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600 dark:text-gray-400 leading-relaxed">
+            With SchedulX’s analytics dashboard, you can gain real-time insights into your social 
+            media performance. Monitor key metrics like impressions, engagement, and audience 
+            growth to fine-tune your strategy for better results.
+          </p>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-gray-400 leading-relaxed">
+            Visualize trends across all platforms and understand what resonates with your audience. 
+            From top-performing posts to detailed performance reports, SchedulX gives you everything 
+            you need to make data-driven decisions.
+          </p>
+          <div className="flex justify-center md:justify-start flex-wrap gap-4 mt-6">
+            <button className="bg-blue-800 hover:bg-blue-600 text-white flex items-center transition-all text-lg font-bold rounded-xl px-6 py-3 dark:bg-bgbutton hover:dark:bg-white hover:dark:text-black">
+              View Analytics {Icons.arrowright}
+            </button>
           </div>
+        </div>
+
+        {/* Right - Image Card */}
+        <div className="flex justify-center">
           <div className="w-full border p-6 rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-200 dark:hover:shadow-slate-700 hover:cursor-pointer">
             <img
               src={section4}
@@ -38,8 +39,9 @@ function Section4() {
             />
           </div>
         </div>
+
       </div>
-    </>
+    </div>
   );
 }
 
