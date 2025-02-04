@@ -29,10 +29,10 @@ import "ckeditor5/ckeditor5.css";
 import "./ckediter.css"
 
 const LICENSE_KEY =
-    'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3MzgzNjc5OTksImp0aSI6IjhhYzI0NWI4LTJjNmYtNGViZC04OTFkLWY3ZWRiMmE5NDkxOCIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6ImI1YmYzZDM1In0.uC0XXH3OuhTgv4hRcJchN-q3Ic86SroBaDbGxAG-3XeTqsk_kFLxv2v0PZgkhILl7axD5TV-BILx-s35QSKQ1Q';
+    'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3Mzk5MjMxOTksImp0aSI6IjNiMmQwOGZkLTYzMmQtNDVjMi1iZmVlLTc5OGYzMzExOTkzYyIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6ImJlNGUyOTA2In0.lF-ROVDYf3qJ59L1-KjaMTkRSSy-qTQTcuby7t4tjmaCDr0Wur1uc3GTUIbDMYCAGZJbt6gMb9nL3PgHOxQe3g';
 
     const CLOUD_SERVICES_TOKEN_URL =
-    'https://8fqtxnl_of9v.cke-cs.com/token/dev/494cf51257b241c249390c2e76647b24d273233a7a6dc286f8b7befa1472?limit=10';
+    'https://hiyyxv56nyrr.cke-cs.com/token/dev/7fad7692f738e9113f6a0851e2ef835948a05e976ab7e890afd59948cdfb?limit=10';
 
 export default function Editer({ onSave, onClose }) {
   const editorRef = useRef(null);
