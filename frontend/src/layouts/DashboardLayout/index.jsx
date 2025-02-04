@@ -90,9 +90,9 @@ const DashboardLayout = () => {
   const handleLogout = async () => {
     try {
       localStorage.removeItem("token");
-      return navigate("/");
+      window.location.href = "/";
     } catch (error) {
-      
+      console.error("Error logging out:", error);
     }
   };
 
