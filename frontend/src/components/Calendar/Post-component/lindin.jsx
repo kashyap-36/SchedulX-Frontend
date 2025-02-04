@@ -8,7 +8,6 @@ const Linkdin = ({ previewImage, postContent, data = {} }) => {
   if (!previewImage && !postContent) {
     return null;
   }
-  console.log("data", data);
   return (
     <div className="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] p-5 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 dark:bg-ScocilMCompnent dark:text-white">
       {/* Header Section */}
