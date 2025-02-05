@@ -752,13 +752,13 @@ function NewPost({ closePopup, initialChannels = [], userData, preview }) {
                     <div className="flex justify-between mt-6">
                       <Button
                         variant="outline"
-                        className="font-bold text-slate-800 p-2 rounded-xl border hover:bg-slate-200 dark:bg-bgbutton border-borderDarkmode dark:text-white"
+                        className="font-bold text-slate-800 p-2 rounded-xl border hover:bg-slate-200 dark:bg-bgbutton border-borderDarkmode dark:text-white text-sm md:text-base"
                         onClick={() => handleSubmit("draft")}
                       >
                         Save as Draft
                       </Button>
                       <Button
-                        className="font-bold text-slate-800 rounded-xl  p-2 border hover:bg-slate-200  dark:bg-bgbutton border-borderDarkmode dark:text-white hidden sm:inline"
+                        className="font-bold text-slate-800 rounded-xl  p-2 border hover:bg-slate-200  dark:bg-bgbutton border-borderDarkmode dark:text-white text-sm md:text-base"
                         onClick={() => handleSubmit("scheduled")}
                       >
                         <span className="">
